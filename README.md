@@ -1,1 +1,1 @@
-# a simple game
+# A simple JavaScript game
