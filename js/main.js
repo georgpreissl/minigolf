@@ -75,8 +75,8 @@ function createBall(){
 function createHole(){
 	return {
 		el: $('.hole').length ? $('.hole') : $("<div/>").addClass('hole').appendTo($gameWrap),
-		x:Math.floor(Math.random()*$(window).width()),
-		y:Math.floor(Math.random()*$(window).height()),
+		x:Math.floor(Math.random()*$('.playarea').width()),
+		y:Math.floor(Math.random()*$('.playarea').height()),
 		h:30,
 		w:30,
 		r:15,
@@ -84,33 +84,103 @@ function createHole(){
 	};
 };
 
+function is_touch_device() {
+	// return true;
+  return 'ontouchstart' in window;
+}
+
+
+
+var iaMove = is_touch_device()  ? 'touchmove' : 'mousemove';
+var iaDown = is_touch_device()  ? 'touchstart' : 'mousedown';
+var iaUp = is_touch_device()  ? 'touchend' : 'mouseup';
+
+if (is_touch_device()) {
+	$('body').addClass('touch_device');
+	$('.playarea').height( $(window).height() - $('.mobile_ui').height() );
+	shootEl = document.getElementsByClassName('newball')[0];
+} else {
+	shootEl = document.body;
+	$('.playarea').height( $(window).height() );
+
+}
+
+$('.debug').text(iaMove + " " + iaDown + " " + iaUp);
+
+function rotatePlus(){
+	obPipe.a+=.1;
+	obPipe.ad = obPipe.a * (180/Math.PI);
+
+}
+function rotateMinus(){
+	obPipe.a-=.1;
+	obPipe.ad = obPipe.a * (180/Math.PI);
+
+}
 if(!useKeys){
 
-	$(window).mousemove(function(e){
-		if(canPlay){
-		
-			mx=e.clientX;
-			my=e.clientY;
-			dx=mx-obPipe.x;
-			dy=my-obPipe.y;
-			obPipe.a = Math.atan2(dy,dx);
-			obPipe.ad = obPipe.a * (180/Math.PI);
-		}	
+	if (is_touch_device()) {
+		document.getElementsByClassName('rot_plus')[0].addEventListener(iaDown, function(e){
+			if (canPlay) {
+				rotatePlus();
+				window.iv = setInterval(rotatePlus,50)
+			}
+		})
+		document.getElementsByClassName('rot_plus')[0].addEventListener(iaUp, function(e){
+			clearInterval(window.iv);
+		})
+		document.getElementsByClassName('rot_minus')[0].addEventListener(iaDown, function(e){
+			if (canPlay) {
+				rotateMinus();
+				window.iv = setInterval(rotateMinus,50)
+			}
+		})
+		document.getElementsByClassName('rot_minus')[0].addEventListener(iaUp, function(e){
+			clearInterval(window.iv);
+		})
 
-	});
+
+
+	} else {
+		// mousemove
+		document.body.addEventListener(iaMove, function(e){
+			if(canPlay){
+
+				   // let touchobj = e.changedTouches[0]; // erster Finger
+				   // mx = touchobj.clientX;
+				   // my = touchobj.clientY;
+				   // $('.debug').text(mx + " " +my);
+				// console.log(distx);
+
+					mx=e.clientX;
+					my=e.clientY;
+
+			
+				dx=mx-obPipe.x;
+				dy=my-obPipe.y;
+				obPipe.a = Math.atan2(dy,dx);
+				obPipe.ad = obPipe.a * (180/Math.PI);
+			}	
+
+		});
+	}
 }
-$body.mousedown(function(e){
+
+//mousedown
+shootEl.addEventListener(iaDown, function(e){
 	if(canPlay){
 		mousedown = true;
 		ballInPipe = true;
 		obCurrentBall = createBall();
 		obCurrentBall.isInPipe = true;
 		arBalls.push(obCurrentBall);
-		
+		console.log('touchstart');
 	}
 	
 })
-$body.mouseup(function(e){
+
+// mouseup
+shootEl.addEventListener(iaUp, function(e){
 	if(canPlay){
 		if(ballInPipe){
 			mousedown = false;
@@ -119,6 +189,7 @@ $body.mouseup(function(e){
 			obCurrentBall.timeToHide = 0;
 			obCurrentBall.ty = Math.sin(obPipe.a)*obCurrentBall.speed + obCurrentBall.y;
 			obCurrentBall.tx = Math.cos(obPipe.a)*obCurrentBall.speed + obCurrentBall.x;
+			console.log('touchend');
 
 		}
 	}	

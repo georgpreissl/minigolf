@@ -26,9 +26,9 @@ Timer.prototype.start = function(renderIt, callBack){
 	
 }
 Timer.prototype.stop = function(callBack){
-			self.done = true;
-			clearInterval(self.iv);
-			delete self.iv;
+	self.done = true;
+	clearInterval(self.iv);
+	delete self.iv;
 	if (typeof callBack === 'function') callBack();	
 }
 Timer.prototype.reset = function(renderIt){
@@ -36,6 +36,6 @@ Timer.prototype.reset = function(renderIt){
 	if (renderIt) this.render();
 }
 Timer.prototype.render = function(){
-	console.log('render');
+	// console.log('render');
 	this.el.find("#timer_time").text(self.nrTime);	
 }

@@ -125,6 +125,75 @@ section {
 	text-align: right;
 	
 }
+.debug {
+	position: absolute;
+	z-index: 9999;
+	color: white;
+	width: 100%;
+	height: 4rem;
+	border: 1px solid;
+	display: none;
+	
+}
+.playarea {
+	position: relative;
+	
+}
+.mobile_ui {
+	height: 8rem;
+	position: relative;
+	display: none;
+	
+}
+.rot {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	width: 50%;
+	height: 4rem;
+	top: 0rem;
+	background-color: white;
+	
+}
+.rot svg {
+	width: 1rem;
+	height: auto;
+	
+}
+.rot_minus {
+	z-index: 99999;
+	left: 0rem;
+	border-right: 2px solid #49633c;
+}
+.rot_plus {
+	z-index: 9999;
+	left: 50%;
+	
+}
+.newball {
+	position: absolute;
+	top: 4rem;
+	z-index: 999;
+	background-color: white;
+	width: 100%;
+	left: 0rem;
+	height: 4rem;
+	border-top: 2px solid #49633c;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+.newball span {
+	color: #49633c;
+	pointer-events: none;
+	
+}
+.touch_device .mobile_ui {
+	display: block;
+	
+}
 @media screen and (min-width: 1000px){
 	#message h1 {
 		font-size: 12em;
