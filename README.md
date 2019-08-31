@@ -1,1 +1,2 @@
-# A simple JavaScript game
+# Minigolf
+A basic js golf game
