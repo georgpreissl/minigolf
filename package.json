@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/georgpreissl/minigolf/issues"
   },
-  "homepage": "https://georgpreissl.github.io/minigolf/",
+  "homepage": "https://georgpreissl.github.io/minigolf",
   "dependencies": {
     "gh-pages": "^2.2.0"
   }
