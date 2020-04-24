@@ -1,0 +1,23 @@
+{
+  "name": "minigolf",
+  "version": "1.0.0",
+  "description": "A basic js golf game",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgpreissl/minigolf.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/georgpreissl/minigolf/issues"
+  },
+  "homepage": "https://georgpreissl.github.io/minigolf/",
+  "dependencies": {
+    "gh-pages": "^2.2.0"
+  }
+}
