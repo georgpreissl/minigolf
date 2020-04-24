@@ -15,6 +15,22 @@ body {
 	color: white;
 	
 }
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+#gameWrap {
+	/* visibility: hidden; */
+}
+.loaded #gameWrap {
+	visibility: visible;
+	
+}
 .pipe {
 	width: 200px;
 	height: 20px;
@@ -29,9 +45,11 @@ body {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
-	background-image: url("img/arrow.svg");
+	background-image: url("img/arrow-mobile.svg");
 	background-repeat: no-repeat;
 	background-position: center center;
+	background-size: 6rem;
+	
 }
 
 .ball {
@@ -194,6 +212,15 @@ section {
 	display: block;
 	
 }
+@media screen and (min-width: 768px){
+	.pipe {
+		background-image: url("img/arrow.svg");
+		background-size: 10rem;
+		
+	}
+	
+}
+
 @media screen and (min-width: 1000px){
 	#message h1 {
 		font-size: 12em;

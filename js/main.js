@@ -10,10 +10,12 @@ $stats = $('#stats');
 
 $messageWrap.hide();
 
-wx = $(window).width()/2;
-wy = $(window).height()/2;
+let ww = $(window).width();
+let wh = $(window).height();
+let wx = ww/2;
+let wy = wh/2;
 arBalls =[];
-speed = 0;
+const nrRotAcceleration = ww < 768 ? .07 : .1;
 mousedown = false;
 useKeys = false;
 emptyHoleExists = false;
@@ -27,8 +29,9 @@ obCounter.create($stats);
 obTimer = new Timer(nrLimitTime);
 obTimer.create($stats);
 
+		skipIntro ? resetGame() : showMessage("<h1>MiniGolf</h1>",0,resetGame);
 
-skipIntro ? resetGame() : showMessage("<h1>MiniGolf</h1>",0,resetGame);
+
 
 function resetGame(){
 	console.log('resetGame');
@@ -108,12 +111,12 @@ if (is_touch_device()) {
 $('.debug').text(iaMove + " " + iaDown + " " + iaUp);
 
 function rotatePlus(){
-	obPipe.a+=.1;
+	obPipe.a += nrRotAcceleration;
 	obPipe.ad = obPipe.a * (180/Math.PI);
 
 }
 function rotateMinus(){
-	obPipe.a-=.1;
+	obPipe.a -= nrRotAcceleration;
 	obPipe.ad = obPipe.a * (180/Math.PI);
 
 }
@@ -202,7 +205,7 @@ function render(){
 	nrBalls = arBalls.length;
 
 	if(nrBalls){
-		for(i=0; i<nrBalls; i++){
+		for(let i=0; i<nrBalls; i++){
 			
 			b = arBalls[i];
 			if(b.alive){
